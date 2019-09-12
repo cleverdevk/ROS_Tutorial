@@ -1,5 +1,3 @@
-# ROS_Tutorial
-ROS
 ROS Tutorial
 ============
 
