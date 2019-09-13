@@ -79,7 +79,7 @@ sudo apt-get install ros-<distro>-ros-tutorials
 + Catkin package는 적어도 CMakeList.txt 와 package.xml 파일을 가지고 있어야 함.
 
 + catkin package 만들기
- * 디렉토리 이동 후 패키지 생성(dependencies 포함)
+ ** 디렉토리 이동 후 패키지 생성(dependencies 포함)
  ```bash
  cd ~/catkin_ws/src
  
