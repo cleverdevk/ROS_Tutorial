@@ -85,10 +85,10 @@ sudo apt-get install ros-<distro>-ros-tutorials
  
  catkin_create_pkg beginner_tutorials std_msgs rospy roscpp
  ```
- * 일반적인 Form
- ```bash
- catkin_create_pkg <package_name> [depend1] [depend2] [depend3]
- ```
+  * 일반적인 Form
+  ```bash
+  catkin_create_pkg <package_name> [depend1] [depend2] [depend3]
+  ```
 + Building a catkin workspace and sourcing the setup file
  * 디렉토리 이동 후 catkin_make
  ```bash
