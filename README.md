@@ -43,3 +43,32 @@ cd ~/catkin_ws/
 catkin_make
 source devel/setup.bash
 ```
+2. ROS File System
+-------------------
+
++ 1) 진행하기 위해서는 ROS Tutorial 패키지를 설치해야 함. (distro는 버전에 따라 다름. 여기선 kinetic)
+```bash
+sudo apt-get install ros-<distro>-ros-tutorials
+```
++ 2) File System Tools
+  * rospack : package에 대한 정보를 얻을 수 있음.
+   * rospack find : package 위치 정보 확인
+    ```bash
+     rospack find roscpp
+     ```
+  * roscd
+   * roscd : ros package의 위치로 이동.(서브디렉토리로도 이동 가능)
+   ```bash
+     roscd roscpp
+     roscd roscpp/cmake
+     ```
+    * roscd log : ROS가 log를 저장하는 디렉토리로 이동.
+    ```bash
+     roscd log
+     ```
+   * rosls : ROS 디렉토리들의 파일 목록 바로 조회.
+   ```bash
+    rosls roscpp_tutorial
+    ```
+    
+    * TAB 자동완성 가능.
