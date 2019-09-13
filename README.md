@@ -72,3 +72,30 @@ sudo apt-get install ros-<distro>-ros-tutorials
     ```
     
     * TAB 자동완성 가능.
+
+3. Creating ROS Package
+-----------------------
+
++ Catkin package는 적어도 CMakeList.txt 와 package.xml 파일을 가지고 있어야 함.
+
++ catkin package 만들기
+ * 디렉토리 이동 후 패키지 생성(dependencies 포함)
+ ```bash
+ cd ~/catkin_ws/src
+ 
+ catkin_create_pkg beginner_tutorials std_msgs rospy roscpp
+ ```
+ * 일반적인 Form
+ ```bash
+ catkin_create_pkg <package_name> [depend1] [depend2] [depend3]
+ ```
++ Building a catkin workspace and sourcing the setup file
+ * 디렉토리 이동 후 catkin_make
+ ```bash
+ cd ~/catkin_ws
+ catkin_make
+ source ~/catkin_ws/devel/setup.bash
+ ```
+ 
+ 
+ 
