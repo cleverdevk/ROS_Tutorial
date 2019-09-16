@@ -184,6 +184,14 @@ sudo apt-get install ros-<distro>-ros-tutorials
 | /baz           | /foo:=/a/b/c/bar   | /foo           | /a/b/c/bar          |
   
   * 그 외의 자세한 내용들은 [여기](http://wiki.ros.org/Nodes)를 참조.
-      
-      
- 
+  
+ * [Messages](http://wiki.ros.org/Messages) : ROS data type used when subscribing or publishing to a topic.
+  * Node들은 message를 topic에 publish해서 각 노드들끼리 통신한다.
+  * message는 지정된 field들로 구성된 간단한 data structure이다.
+  * Standard primitive types(integer, floating point, boolean, etc..)가 지원되며, 구조체와 같은 primitive나 배열도 포함될 수 있다.
+  * 또한 ROS Service Call을 통해서 Request와 Response를 주고받을 수 있는데, 이러한 Request와 Response Message는 [srv file](http://wiki.ros.org/srv)로 정의됨.
+   * [msg](http://wiki.ros.org/msg) files : message의 data structure를 명시하기 위한 simple text file. package의 msg라는 subdirectory에 저장된다. 또한 노드는 메시지 유형과 MD5 sum이 일치해야만 통신할 수 있다.
+   * Message Types : Standard ROS [naming](http://wiki.ros.org/Names)을 사용하는데, "패키지이름/메시지파일이름" 이러한 형식이다.
+   * Building : CMakeList.txt파일 안에서 rosbuild_genmsg()를 통해서 가능.
+   * 그 외의 자세한 내용들은 [여기](http://wiki.ros.org/Messages)를 참조.
+   
