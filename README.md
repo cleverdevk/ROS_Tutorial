@@ -141,7 +141,53 @@ sudo apt-get install ros-<distro>-ros-tutorials
    <test_depend>python-mock</test_depend>
    ```
 
+4. Building a ROS Package
+-----------------------
+
++ Building Packages
+  * catkin_make 사용하기 : catkin_make는 cmake와 make를 결합한 call이라고 생각하면 됨.
+  ```bash
+  # catkin workspace에서..(catkin_ws)
+  catkin_make
+  catkin_make install # (optionally)
+  ```
+  위의 명령어는 아래의 CMake 프로젝트의 Flow와 비슷한 흐름이라고 볼 수 있다.
   
+  ```bash
+  # In a CMake project
+  $ mkdir build
+  $ cd build
+  $ cmake ..
+  $ make
+  $ make install  # (optionally)
+  ```
+  5. Understanding ROS Nodes
+-----------------------------
+
+  + Overview of Graph Concepts
+    * [Nodes](http://wiki.ros.org/Nodes) : An executable that uses ROS to communicate with other nodes.
+      계산을 수행하는 프로세스. 노드들은 그래프에 결합되고 다른 노드들과 통신한다.
+      통신에는 [Streaming Topics](#streaming_topics), [RPC Services](#rpcservices), [Parameter Server](#parameterserver)를 사용한다.
+      실행중인 모든 노드는 나머지 시스템 노드들과 고유하게 식별될 수 있는 [Graph Resource Name](http://wiki.ros.org/Names)이 있다.
+      또한 노드는 Node Type을 가지는데, 노드의 패키지 이름과 노드의 실행파일 이름 그리고 [Package Resource Name](http://wiki.ros.org/Names)이다.
+      ROS는 이름을 통해서 모든 executable을 찾고 가장 먼저 찾아진 것을 고르기 때문에, 같은 이름의 다른 실행파일을 만들지 않도록 주의해야 한다.
+       * Command-line Remapping Arguments
+       ROS의 강력한 기능중 하나로, 같은 노드를 많은 환경설정으로 실행할 수 있다.
+       ```bash
+       rosrun rospy_tutorials talker chatter:=/wg/chatter
+       ```
+       이렇게 실행을 하게 되면, talker에게 chatter대신 /wg/chatter에게 publish하도록 Remapping 할 수 있다.
+       Remapping되는 예시는 다음과 같다.
+       | Node Namespace | Remapping Argument | Matching Names | Final Resolved Name |
+       | :------------- | :----------------: | :------------: | ------------------: |
+       | /              | foo:=bar           | foo, /foo      | /bar                |
+       | /baz           | foo:=bar           | foo, /baz/foo  | /baz/bar            |
+       | /              | /foo:=bar          | foo, /foo      | /bar                |
+       | /baz           | /foo:=bar          | /foo           | /baz/bar            |
+       | /baz           | /foo:=/a/b/c/bar   | /foo           | /a/b/c/bar          |
+       [Remapping Examples]
   
- 
+  + 그 외의 자세한 내용들은 [여기](http://wiki.ros.org/Nodes)를 참조.
+      
+      
  
