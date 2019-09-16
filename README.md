@@ -120,10 +120,11 @@ sudo apt-get install ros-<distro>-ros-tutorials
    <license>BSD or MIT or GPLv2....</license>
    ```
    - dependencies Tags : package의 dependency를 명시하는데 4가지로 나뉨. 자세한 내용은 [여기](http://wiki.ros.org/catkin/package.xml#Build.2C_Run.2C_and_Test_Dependencies)를 참조.
-    * build_depend : 빌드타임에 패키지 설치에 필요한 패키지들을 명시
-    * buildtool_depend : 패키지를 빌드할 때 필요한 build system tool을 명시
-    * exec_depend : 패키지를 실행하는데 필요한 패키지들을 명시.
-    * test_depend : 오직 unit test를 위해서 필요한 추가적인 패키지를 명시.
+   
+     * build_depend : 빌드타임에 패키지 설치에 필요한 패키지들을 명시
+     * buildtool_depend : 패키지를 빌드할 때 필요한 build system tool을 명시
+     * exec_depend : 패키지를 실행하는데 필요한 패키지들을 명시.
+     * test_depend : 오직 unit test를 위해서 필요한 추가적인 패키지를 명시.
    ```
    <!-- Examples -->
    <buildtool_depend>catkin</buildtool_depend>
