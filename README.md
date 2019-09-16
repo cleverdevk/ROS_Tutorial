@@ -79,7 +79,7 @@ sudo apt-get install ros-<distro>-ros-tutorials
 + Catkin package는 적어도 CMakeList.txt 와 package.xml 파일을 가지고 있어야 함.
 
 + catkin package 만들기
- ** 디렉토리 이동 후 패키지 생성(dependencies 포함)
+ * 디렉토리 이동 후 패키지 생성(dependencies 포함)
  ```bash
  cd ~/catkin_ws/src
  
@@ -107,19 +107,19 @@ sudo apt-get install ros-<distro>-ros-tutorials
    ```
 + Customizing Package
  * package directory 안의 pacakge.xml 파일을 수정하여 커스터마이징
-  * description Tag
+  - description Tag
   ```
   <description>프로젝트에 대한 대략적인 설명</description>
   ```
-  * maintainer Tag : 최소 한명 이상의 package maintainer 있어야 함.
+  - maintainer Tag : 최소 한명 이상의 package maintainer 있어야 함.
   ```
   <maintainer email="cleverdevk@gmail.com>Inbae Kang</maintainer>
   ```
-  ** license Tag
+  - license Tag
   ```
   <license>BSD or MIT or GPLv2....</license>
   ```
-  * dependencies Tags : package의 dependency를 명시하는데 4가지로 나뉨. 자세한 내용은 [여기](http://wiki.ros.org/catkin/package.xml#Build.2C_Run.2C_and_Test_Dependencies)를 참조.
+  - dependencies Tags : package의 dependency를 명시하는데 4가지로 나뉨. 자세한 내용은 [여기](http://wiki.ros.org/catkin/package.xml#Build.2C_Run.2C_and_Test_Dependencies)를 참조.
    * build_depend : 빌드타임에 패키지 설치에 필요한 패키지들을 명시
    * buildtool_depend : 패키지를 빌드할 때 필요한 build system tool을 명시
    * exec_depend : 패키지를 실행하는데 필요한 패키지들을 명시.
