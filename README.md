@@ -57,7 +57,7 @@ sudo apt-get install ros-<distro>-ros-tutorials
      rospack find roscpp
      ```
   * roscd
-   * roscd : ros package의 위치로 이동.(서브디렉토리로도 이동 가능)
+    * roscd : ros package의 위치로 이동.(서브디렉토리로도 이동 가능)
    ```bash
      roscd roscpp
      roscd roscpp/cmake
@@ -97,49 +97,49 @@ sudo apt-get install ros-<distro>-ros-tutorials
  source ~/catkin_ws/devel/setup.bash
  ```
  + Package dependencies
-  * First-order dependencies : First Order Dependencies를 확인
+   * First-order dependencies : First Order Dependencies를 확인
+    ```bash
+    rospack depends1 beginner_tutorials
+    ```
+   * Indirect dependencies : Recursive하게 모든 Dependencies를 확인
    ```bash
-   rospack depends1 beginner_tutorials
+    rospack depends beginner_tutorials
+    ```
+ + Customizing Package
+  * package directory 안의 pacakge.xml 파일을 수정하여 커스터마이징
+   - description Tag
    ```
-  * Indirect dependencies : Recursive하게 모든 Dependencies를 확인
-  ```bash
-   rospack depends beginner_tutorials
+   <description>프로젝트에 대한 대략적인 설명</description>
    ```
-+ Customizing Package
- * package directory 안의 pacakge.xml 파일을 수정하여 커스터마이징
-  - description Tag
-  ```
-  <description>프로젝트에 대한 대략적인 설명</description>
-  ```
-  - maintainer Tag : 최소 한명 이상의 package maintainer 있어야 함.
-  ```
-  <maintainer email="cleverdevk@gmail.com>Inbae Kang</maintainer>
-  ```
-  - license Tag
-  ```
-  <license>BSD or MIT or GPLv2....</license>
-  ```
-  - dependencies Tags : package의 dependency를 명시하는데 4가지로 나뉨. 자세한 내용은 [여기](http://wiki.ros.org/catkin/package.xml#Build.2C_Run.2C_and_Test_Dependencies)를 참조.
-   * build_depend : 빌드타임에 패키지 설치에 필요한 패키지들을 명시
-   * buildtool_depend : 패키지를 빌드할 때 필요한 build system tool을 명시
-   * exec_depend : 패키지를 실행하는데 필요한 패키지들을 명시.
-   * test_depend : 오직 unit test를 위해서 필요한 추가적인 패키지를 명시.
-  ```
-  <!-- Examples -->
-  <buildtool_depend>catkin</buildtool_depend>
+   - maintainer Tag : 최소 한명 이상의 package maintainer 있어야 함.
+   ```
+   <maintainer email="cleverdevk@gmail.com>Inbae Kang</maintainer>
+   ```
+   - license Tag
+   ```
+   <license>BSD or MIT or GPLv2....</license>
+   ```
+   - dependencies Tags : package의 dependency를 명시하는데 4가지로 나뉨. 자세한 내용은 [여기](http://wiki.ros.org/catkin/package.xml#Build.2C_Run.2C_and_Test_Dependencies)를 참조.
+    * build_depend : 빌드타임에 패키지 설치에 필요한 패키지들을 명시
+    * buildtool_depend : 패키지를 빌드할 때 필요한 build system tool을 명시
+    * exec_depend : 패키지를 실행하는데 필요한 패키지들을 명시.
+    * test_depend : 오직 unit test를 위해서 필요한 추가적인 패키지를 명시.
+   ```
+   <!-- Examples -->
+   <buildtool_depend>catkin</buildtool_depend>
 
-  <build_depend>message_generation</build_depend>
-  <build_depend>roscpp</build_depend>
-  <build_depend>std_msgs</build_depend>
+   <build_depend>message_generation</build_depend>
+   <build_depend>roscpp</build_depend>
+   <build_depend>std_msgs</build_depend>
 
-  <run_depend>message_runtime</run_depend>
-  <run_depend>roscpp</run_depend>
-  <run_depend>rospy</run_depend>
-  <run_depend>std_msgs</run_depend>
+   <run_depend>message_runtime</run_depend>
+   <run_depend>roscpp</run_depend>
+   <run_depend>rospy</run_depend>
+   <run_depend>std_msgs</run_depend>
 
-  <test_depend>python-mock</test_depend>
-  ```
-  
+   <test_depend>python-mock</test_depend>
+   ```
+
   
   
  
