@@ -161,37 +161,37 @@ sudo apt-get install ros-<distro>-ros-tutorials
 -----------------------------
 
 * Overview of Graph Concepts
- * [Nodes](http://wiki.ros.org/Nodes) : An executable that uses ROS to communicate with other nodes.
-  * 계산을 수행하는 프로세스. 노드들은 그래프에 결합되고 다른 노드들과 통신한다.
-  * 통신에는 [Streaming Topics](#streaming_topics), [RPC Services](#rpcservices), [Parameter Server](#parameterserver)를 사용한다.
-  * 실행중인 모든 노드는 나머지 시스템 노드들과 고유하게 식별될 수 있는 [Graph Resource Name](http://wiki.ros.org/Names)이 있다.
-  * 또한 노드는 Node Type을 가지는데, 노드의 패키지 이름과 노드의 실행파일 이름 그리고 [Package Resource Name](http://wiki.ros.org/Names)이다.
-  * ROS는 이름을 통해서 모든 executable을 찾고 가장 먼저 찾아진 것을 고르기 때문에, 같은 이름의 다른 실행파일을 만들지 않도록 주의해야 한다.
-  * Command-line Remapping Arguments
-   ROS의 강력한 기능중 하나로, 같은 노드를 많은 환경설정으로 실행할 수 있다.
-   ```bash
-   rosrun rospy_tutorials talker chatter:=/wg/chatter
-   ```
-   이렇게 실행을 하게 되면, talker에게 chatter대신 /wg/chatter에게 publish하도록 Remapping 할 수 있다.
-   Remapping되는 예시는 다음과 같다.
-   
-| Node Namespace | Remapping Argument | Matching Names | Final Resolved Name |
-|:---------------|:-------------------|:---------------|:--------------------|
-| /              | foo:=bar           | foo, /foo      | /bar                |
-| /baz           | foo:=bar           | foo, /baz/foo  | /baz/bar            |
-| /              | /foo:=bar          | foo, /foo      | /bar                |
-| /baz           | /foo:=bar          | /foo           | /baz/bar            |
-| /baz           | /foo:=/a/b/c/bar   | /foo           | /a/b/c/bar          |
-  
-  * 그 외의 자세한 내용들은 [여기](http://wiki.ros.org/Nodes)를 참조.
+  * [Nodes](http://wiki.ros.org/Nodes) : An executable that uses ROS to communicate with other nodes.
+   * 계산을 수행하는 프로세스. 노드들은 그래프에 결합되고 다른 노드들과 통신한다.
+   * 통신에는 [Streaming Topics](#streaming_topics), [RPC Services](#rpcservices), [Parameter Server](#parameterserver)를 사용한다.
+   * 실행중인 모든 노드는 나머지 시스템 노드들과 고유하게 식별될 수 있는 [Graph Resource Name](http://wiki.ros.org/Names)이 있다.
+   * 또한 노드는 Node Type을 가지는데, 노드의 패키지 이름과 노드의 실행파일 이름 그리고 [Package Resource Name](http://wiki.ros.org/Names)이다.
+   * ROS는 이름을 통해서 모든 executable을 찾고 가장 먼저 찾아진 것을 고르기 때문에, 같은 이름의 다른 실행파일을 만들지 않도록 주의해야 한다.
+   * Command-line Remapping Arguments
+    ROS의 강력한 기능중 하나로, 같은 노드를 많은 환경설정으로 실행할 수 있다.
+    ```bash
+    rosrun rospy_tutorials talker chatter:=/wg/chatter
+    ```
+    이렇게 실행을 하게 되면, talker에게 chatter대신 /wg/chatter에게 publish하도록 Remapping 할 수 있다.
+    Remapping되는 예시는 다음과 같다.
+
+    | Node Namespace | Remapping Argument | Matching Names | Final Resolved Name |
+    |:---------------|:-------------------|:---------------|:--------------------|
+    | /              | foo:=bar           | foo, /foo      | /bar                |
+    | /baz           | foo:=bar           | foo, /baz/foo  | /baz/bar            |
+    | /              | /foo:=bar          | foo, /foo      | /bar                |
+    | /baz           | /foo:=bar          | /foo           | /baz/bar            |
+    | /baz           | /foo:=/a/b/c/bar   | /foo           | /a/b/c/bar          |
+
+   * 그 외의 자세한 내용들은 [여기](http://wiki.ros.org/Nodes)를 참조.
   
  * [Messages](http://wiki.ros.org/Messages) : ROS data type used when subscribing or publishing to a topic.
-  * Node들은 message를 topic에 publish해서 각 노드들끼리 통신한다.
-  * message는 지정된 field들로 구성된 간단한 data structure이다.
-  * Standard primitive types(integer, floating point, boolean, etc..)가 지원되며, 구조체와 같은 primitive나 배열도 포함될 수 있다.
-  * 또한 ROS Service Call을 통해서 Request와 Response를 주고받을 수 있는데, 이러한 Request와 Response Message는 [srv file](http://wiki.ros.org/srv)로 정의됨.
-   * [msg](http://wiki.ros.org/msg) files : message의 data structure를 명시하기 위한 simple text file. package의 msg라는 subdirectory에 저장된다. 또한 노드는 메시지 유형과 MD5 sum이 일치해야만 통신할 수 있다.
-   * Message Types : Standard ROS [naming](http://wiki.ros.org/Names)을 사용하는데, "패키지이름/메시지파일이름" 이러한 형식이다.
-   * Building : CMakeList.txt파일 안에서 rosbuild_genmsg()를 통해서 가능.
-   * 그 외의 자세한 내용들은 [여기](http://wiki.ros.org/Messages)를 참조.
+   * Node들은 message를 topic에 publish해서 각 노드들끼리 통신한다.
+   * message는 지정된 field들로 구성된 간단한 data structure이다.
+   * Standard primitive types(integer, floating point, boolean, etc..)가 지원되며, 구조체와 같은 primitive나 배열도 포함될 수 있다.
+   * 또한 ROS Service Call을 통해서 Request와 Response를 주고받을 수 있는데, 이러한 Request와 Response Message는 [srv file](http://wiki.ros.org/srv)로 정의됨.
+    * [msg](http://wiki.ros.org/msg) files : message의 data structure를 명시하기 위한 simple text file. package의 msg라는 subdirectory에 저장된다. 또한 노드는 메시지 유형과 MD5 sum이 일치해야만 통신할 수 있다.
+    * Message Types : Standard ROS [naming](http://wiki.ros.org/Names)을 사용하는데, "패키지이름/메시지파일이름" 이러한 형식이다.
+    * Building : CMakeList.txt파일 안에서 rosbuild_genmsg()를 통해서 가능.
+    * 그 외의 자세한 내용들은 [여기](http://wiki.ros.org/Messages)를 참조.
    
