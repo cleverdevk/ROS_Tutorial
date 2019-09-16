@@ -107,11 +107,11 @@ sudo apt-get install ros-<distro>-ros-tutorials
    ```
 + Customizing Package
  * package directory 안의 pacakge.xml 파일을 수정하여 커스터마이징
-  ** description Tag
+  * description Tag
   ```
   <description>프로젝트에 대한 대략적인 설명</description>
   ```
-  ** maintainer Tag : 최소 한명 이상의 package maintainer 있어야 함.
+  * maintainer Tag : 최소 한명 이상의 package maintainer 있어야 함.
   ```
   <maintainer email="cleverdevk@gmail.com>Inbae Kang</maintainer>
   ```
