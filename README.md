@@ -1,7 +1,4 @@
 # ROS_Tutorial
-ROS
-ROS Tutorial
-============
 
 1. Installation
 ---------------
@@ -177,14 +174,14 @@ sudo apt-get install ros-<distro>-ros-tutorials
    ```
    이렇게 실행을 하게 되면, talker에게 chatter대신 /wg/chatter에게 publish하도록 Remapping 할 수 있다.
    Remapping되는 예시는 다음과 같다.
-       | Node Namespace | Remapping Argument | Matching Names | Final Resolved Name |
-       |:---------------|:-------------------|:---------------|:--------------------|
-       | /              | foo:=bar           | foo, /foo      | /bar                |
-       | /baz           | foo:=bar           | foo, /baz/foo  | /baz/bar            |
-       | /              | /foo:=bar          | foo, /foo      | /bar                |
-       | /baz           | /foo:=bar          | /foo           | /baz/bar            |
-       | /baz           | /foo:=/a/b/c/bar   | /foo           | /a/b/c/bar          |
-       [Remapping Examples]
+   
+| Node Namespace | Remapping Argument | Matching Names | Final Resolved Name |
+|:---------------|:-------------------|:---------------|:--------------------|
+| /              | foo:=bar           | foo, /foo      | /bar                |
+| /baz           | foo:=bar           | foo, /baz/foo  | /baz/bar            |
+| /              | /foo:=bar          | foo, /foo      | /bar                |
+| /baz           | /foo:=bar          | /foo           | /baz/bar            |
+| /baz           | /foo:=/a/b/c/bar   | /foo           | /a/b/c/bar          |
   
   * 그 외의 자세한 내용들은 [여기](http://wiki.ros.org/Nodes)를 참조.
       
