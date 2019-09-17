@@ -161,49 +161,65 @@ sudo apt-get install ros-<distro>-ros-tutorials
 -----------------------------
 
 * Overview of Graph Concepts
+
   * [Nodes](http://wiki.ros.org/Nodes) : An executable that uses ROS to communicate with other nodes.
-   * 계산을 수행하는 프로세스. 노드들은 그래프에 결합되고 다른 노드들과 통신한다.
-   * 통신에는 [Streaming Topics](#streaming_topics), [RPC Services](#rpcservices), [Parameter Server](#parameterserver)를 사용한다.
-   * 실행중인 모든 노드는 나머지 시스템 노드들과 고유하게 식별될 수 있는 [Graph Resource Name](http://wiki.ros.org/Names)이 있다.
-   * 또한 노드는 Node Type을 가지는데, 노드의 패키지 이름과 노드의 실행파일 이름 그리고 [Package Resource Name](http://wiki.ros.org/Names)이다.
-   * ROS는 이름을 통해서 모든 executable을 찾고 가장 먼저 찾아진 것을 고르기 때문에, 같은 이름의 다른 실행파일을 만들지 않도록 주의해야 한다.
-   * Command-line Remapping Arguments
-    ROS의 강력한 기능중 하나로, 같은 노드를 많은 환경설정으로 실행할 수 있다.
-    ```bash
-    rosrun rospy_tutorials talker chatter:=/wg/chatter
-    ```
-    이렇게 실행을 하게 되면, talker에게 chatter대신 /wg/chatter에게 publish하도록 Remapping 할 수 있다.
-    Remapping되는 예시는 다음과 같다.
+    * 계산을 수행하는 프로세스. 노드들은 그래프에 결합되고 다른 노드들과 통신한다.
+    * 통신에는 [Streaming Topics](#streaming_topics), [RPC Services](#rpcservices), [Parameter Server](#parameterserver)를 사용한다.
+    * 실행중인 모든 노드는 나머지 시스템 노드들과 고유하게 식별될 수 있는 [Graph Resource Name](http://wiki.ros.org/Names)이 있다.
+    * 또한 노드는 Node Type을 가지는데, 노드의 패키지 이름과 노드의 실행파일 이름 그리고 [Package Resource Name](http://wiki.ros.org/Names)이다.
+    * ROS는 이름을 통해서 모든 executable을 찾고 가장 먼저 찾아진 것을 고르기 때문에, 같은 이름의 다른 실행파일을 만들지 않도록 주의해야 한다.
+    * Command-line Remapping Arguments
+     ROS의 강력한 기능중 하나로, 같은 노드를 많은 환경설정으로 실행할 수 있다.
+     ```bash
+     rosrun rospy_tutorials talker chatter:=/wg/chatter
+     ```
+     이렇게 실행을 하게 되면, talker에게 chatter대신 /wg/chatter에게 publish하도록 Remapping 할 수 있다.
+     Remapping되는 예시는 다음과 같다.
 
-    | Node Namespace | Remapping Argument | Matching Names | Final Resolved Name |
-    |:---------------|:-------------------|:---------------|:--------------------|
-    | /              | foo:=bar           | foo, /foo      | /bar                |
-    | /baz           | foo:=bar           | foo, /baz/foo  | /baz/bar            |
-    | /              | /foo:=bar          | foo, /foo      | /bar                |
-    | /baz           | /foo:=bar          | /foo           | /baz/bar            |
-    | /baz           | /foo:=/a/b/c/bar   | /foo           | /a/b/c/bar          |
+     | Node Namespace | Remapping Argument | Matching Names | Final Resolved Name |
+     |:---------------|:-------------------|:---------------|:--------------------|
+     | /              | foo:=bar           | foo, /foo      | /bar                |
+     | /baz           | foo:=bar           | foo, /baz/foo  | /baz/bar            |
+     | /              | /foo:=bar          | foo, /foo      | /bar                |
+     | /baz           | /foo:=bar          | /foo           | /baz/bar            |
+     | /baz           | /foo:=/a/b/c/bar   | /foo           | /a/b/c/bar          |
 
-   * 그 외의 자세한 내용들은 [여기](http://wiki.ros.org/Nodes)를 참조.
+    * 그 외의 자세한 내용들은 [여기](http://wiki.ros.org/Nodes)를 참조.
   
- * [Messages](http://wiki.ros.org/Messages) : ROS data type used when subscribing or publishing to a topic.
-   * Node들은 message를 topic에 publish해서 각 노드들끼리 통신한다.
-   * message는 지정된 field들로 구성된 간단한 data structure이다.
-   * Standard primitive types(integer, floating point, boolean, etc..)가 지원되며, 구조체와 같은 primitive나 배열도 포함될 수 있다.
-   * 또한 ROS Service Call을 통해서 Request와 Response를 주고받을 수 있는데, 이러한 Request와 Response Message는 [srv file](http://wiki.ros.org/srv)로 정의됨.
-    * [msg](http://wiki.ros.org/msg) files : message의 data structure를 명시하기 위한 simple text file. package의 msg라는 subdirectory에 저장된다. 또한 노드는 메시지 유형과 MD5 sum이 일치해야만 통신할 수 있다.
-    * Message Types : Standard ROS [naming](http://wiki.ros.org/Names)을 사용하는데, "패키지이름/메시지파일이름" 이러한 형식이다.
-    * Building : CMakeList.txt파일 안에서 rosbuild_genmsg()를 통해서 가능.
-    * 그 외의 자세한 내용들은 [여기](http://wiki.ros.org/Messages)를 참조.
-   
- * [Topics](http://wiki.ros.org/Topics) : Nodes can publish messages to a topic as well as subscribe to a topic to receive messages.
-    * 노드들이 메시지를 교환하는 **이름이 있는** 버스라고 생각하면 됨.
-    * 정보의 production과 consumption을 분리하여 익명의 publish/subscribe를 가짐.
-    * 따라서 노드들은 각각 누구와 통신하는지 모름. 대신에 관심이 있는 정보에 대해서 **Subscribe**하거나 **Publish**하는 것.
-    * 이러한 특성에 따라서 토픽에 다수의 publisher/subscriber가 존재할 수 있음.
-    * Topics은 그래서 undicrectional하고, Streaming Communication이다. 
-    * Remote Procedure Call을 수행해야 하는 Node는(즉 요청에 응답해야하는 노드) 대신 Services를 사용해야 함.
-    * 적은 양의 상태를 유지하는 [Parameter Server](http://wiki.ros.org/Parameter%20Server)가 존재함.
-    * 각각의 Topic은 해당 Topic에 publish하는데 사용되는 ROS Message Type에 의해서 type이 지정되며 각 노드는 일치하는 type의 메시지만 받을 수 있음. 이 과정에서, 모든 ROS Client는 MD5를 계산하고 일치하는지도 확인하여 일관된 코드 베이스에서 컴파일 되었는지도 체크함.
-    * [Master](http://wiki.ros.org/Master) 노드는 type consistency에 제약을 받지 않는데, subscriber는 type이 매치되기 전까지는 message 전송을 하지 않음.
-    * TCP/IP기반으로 전송함. UDP는 현재 roscpp만 지원하니까 패스함.
-    * 그 외의 자세한 내용들은 [여기](http://wiki.ros.org/Topics)를 참조.
+  * [Messages](http://wiki.ros.org/Messages) : ROS data type used when subscribing or publishing to a topic.
+    * Node들은 message를 topic에 publish해서 각 노드들끼리 통신한다.
+    * message는 지정된 field들로 구성된 간단한 data structure이다.
+    * Standard primitive types(integer, floating point, boolean, etc..)가 지원되며, 구조체와 같은 primitive나 배열도 포함될 수 있다.
+    * 또한 ROS Service Call을 통해서 Request와 Response를 주고받을 수 있는데, 이러한 Request와 Response Message는 [srv file](http://wiki.ros.org/srv)로 정의됨.
+     * [msg](http://wiki.ros.org/msg) files : message의 data structure를 명시하기 위한 simple text file. package의 msg라는 subdirectory에 저장된다. 또한 노드는 메시지 유형과 MD5 sum이 일치해야만 통신할 수 있다.
+     * Message Types : Standard ROS [naming](http://wiki.ros.org/Names)을 사용하는데, "패키지이름/메시지파일이름" 이러한 형식이다.
+     * Building : CMakeList.txt파일 안에서 rosbuild_genmsg()를 통해서 가능.
+     * 그 외의 자세한 내용들은 [여기](http://wiki.ros.org/Messages)를 참조.
+
+  * [Topics](http://wiki.ros.org/Topics) : Nodes can publish messages to a topic as well as subscribe to a topic to receive messages.
+     * 노드들이 메시지를 교환하는 **이름이 있는** 버스라고 생각하면 됨.
+     * 정보의 production과 consumption을 분리하여 익명의 publish/subscribe를 가짐.
+     * 따라서 노드들은 각각 누구와 통신하는지 모름. 대신에 관심이 있는 정보에 대해서 **Subscribe**하거나 **Publish**하는 것.
+     * 이러한 특성에 따라서 토픽에 다수의 publisher/subscriber가 존재할 수 있음.
+     * Topics은 그래서 undicrectional하고, Streaming Communication이다. 
+     * Remote Procedure Call을 수행해야 하는 Node는(즉 요청에 응답해야하는 노드) 대신 Services를 사용해야 함.
+     * 적은 양의 상태를 유지하는 [Parameter Server](http://wiki.ros.org/Parameter%20Server)가 존재함.
+     * 각각의 Topic은 해당 Topic에 publish하는데 사용되는 ROS Message Type에 의해서 type이 지정되며 각 노드는 일치하는 type의 메시지만 받을 수 있음. 이 과정에서, 모든 ROS Client는 MD5를 계산하고 일치하는지도 확인하여 일관된 코드 베이스에서 컴파일 되었는지도 체크함.
+     * Master 노드(아래 참조)는 type consistency에 제약을 받지 않는데, subscriber는 type이 매치되기 전까지는 message 전송을 하지 않음.
+     * TCP/IP기반으로 전송함. UDP는 현재 roscpp만 지원하니까 패스함.
+     * 그 외의 자세한 내용들은 [여기](http://wiki.ros.org/Topics)를 참조.
+
+  * [Master](http://wiki.ros.org/Master) : Name service for ROS (i.e. helps nodes find each other)
+     * ROS Master는 ROS system의 node들의 naming과 registration을 할 수 있도록 한다.
+     * Topic과 Service에 대한 Publisher/Subscriber를 추적함.
+     * Master의 역할은 ROS의 개별 노드들이 서로를 찾을 수 있도록 하는 것임.
+     * 이러한 노드들이 서로를 찾으면 서로 peer-to-peer communication을 함.
+     * Master가 Parameter Server를 제공함.
+     * roscore 명령어로 다른 필수적인 components와 함께 실행됨.
+     * naming 및 그외의 자세한 내용들은 [여기](http://wiki.ros.org/Master)를 참조.
+     
+  * [rosout](http://wiki.ros.org/rosout) : ROS equivalent of stdout/stderr
+  * [roscore](http://wiki.ros.org/roscore) : Master + rosout + parameter server (parameter server will be introduced later)
+  
+
+* Node들은 Service를 사용하거나 제공할 수 있다.
