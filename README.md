@@ -195,3 +195,15 @@ sudo apt-get install ros-<distro>-ros-tutorials
     * Building : CMakeList.txt파일 안에서 rosbuild_genmsg()를 통해서 가능.
     * 그 외의 자세한 내용들은 [여기](http://wiki.ros.org/Messages)를 참조.
    
+ * [Topics](http://wiki.ros.org/Topics) : Nodes can publish messages to a topic as well as subscribe to a topic to receive messages.
+    * 노드들이 메시지를 교환하는 **이름이 있는** 버스라고 생각하면 됨.
+    * 정보의 production과 consumption을 분리하여 익명의 publish/subscribe를 가짐.
+    * 따라서 노드들은 각각 누구와 통신하는지 모름. 대신에 관심이 있는 정보에 대해서 **Subscribe**하거나 **Publish**하는 것.
+    * 이러한 특성에 따라서 토픽에 다수의 publisher/subscriber가 존재할 수 있음.
+    * Topics은 그래서 undicrectional하고, Streaming Communication이다. 
+    * Remote Procedure Call을 수행해야 하는 Node는(즉 요청에 응답해야하는 노드) 대신 Services를 사용해야 함.
+    * 적은 양의 상태를 유지하는 [Parameter Server](http://wiki.ros.org/Parameter%20Server)가 존재함.
+    * 각각의 Topic은 해당 Topic에 publish하는데 사용되는 ROS Message Type에 의해서 type이 지정되며 각 노드는 일치하는 type의 메시지만 받을 수 있음. 이 과정에서, 모든 ROS Client는 MD5를 계산하고 일치하는지도 확인하여 일관된 코드 베이스에서 컴파일 되었는지도 체크함.
+    * [Master](http://wiki.ros.org/Master) 노드는 type consistency에 제약을 받지 않는데, subscriber는 type이 매치되기 전까지는 message 전송을 하지 않음.
+    * TCP/IP기반으로 전송함. UDP는 현재 roscpp만 지원하니까 패스함.
+    * 그 외의 자세한 내용들은 [여기](http://wiki.ros.org/Topics)를 참조.
