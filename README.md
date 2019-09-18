@@ -251,3 +251,22 @@ sudo apt-get install ros-<distro>-ros-tutorials
   * 두 개의 노드가 추가된 것을 알 수 있다.
   
   
+5. Understanding ROS Topics
+-----------------------------
+
+* Turtlesim Teleoperation : 거북이를 키보드 방향키로 움직이도록 할 수 있는 패키지
+```bash
+rosrun turtlesim turtle_teleop_key
+```
+를 실행하고 그 터미널에서 방향키를 누르면 거북이가 움직인다.
+왜냐하면 turtle_teleop_key가 turtle1/cmd_vel이라는 Topic에 Publish하고 turtlesim_node가 Subscribe하기 때문에 가능하다.
+현재 Node 및 Topic에 관한 그래프는 rqt_graph로 확인 가능하다.
+```bash
+#설치가 안되어 있다면
+sudo apt-get install ros-kinetic-rqt
+sudo apt-get install ros-kinetic-rqt-common-plugins
+
+#그래프 확인은 새로운 터미널을 열고
+rosrun rqt_graph rqt_graph
+```
+![rqt](https://i.imgur.com/qG07xfc.png)
