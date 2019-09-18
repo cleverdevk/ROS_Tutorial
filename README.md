@@ -270,3 +270,32 @@ sudo apt-get install ros-kinetic-rqt-common-plugins
 rosrun rqt_graph rqt_graph
 ```
 ![rqt](https://i.imgur.com/qG07xfc.png)
+
+- rostopic 명령어 : rostopic tool은 ROS topic에 대한 정보들을 얻을 수 있는 명렁어
+    - rostopic -h : help option
+    - rostopic echo : 해당 토픽에 publish되는 데이터를 볼 수 있다.
+    ```bash
+    rostopic echo /turtle1/cmd_vel
+    ````
+    rostopic echo를 켠 상태로 거북이를 움직이면, 메시지가 기록된다.
+
+    ![echo](https://i.imgur.com/Nw1a6ec.png)
+
+- ROS Messages
+    - rostopic type [topic] : 토픽의 type 확인
+    - rosmsg show [type of topic] : message의 detail 확인
+    ```bash
+    rostopic type /turtle1/cmd_vel
+    rosmsg show geometry_msgs/Twist
+    ```
+    ![terminal](https://i.imgur.com/j0iNEVu.png)
+
+    - rostopic pub [topic] [msg_type] [args] : currently advertised topic에 data를 publish할 수 있음.
+    ```bash
+    rostopic pub -1 /turtle1/cmd_vel geometry_msgs/Twist -- '[2.0, 0.0, 0.0]' '[0.0, 0.0, 1.8]'
+    ```
+    - -1 option : 오직 한개의 message만 publish하고 exit
+    - — : 다음 인자가 옵션이 아님을 알려주는 것.
+    - 두개의 coordination은 linear와 angular에 대한 인자이다.
+
+    그 외의 자세한 내용은 [여기](http://wiki.ros.org/ROS/Tutorials/UnderstandingTopics)를 참조.
