@@ -251,7 +251,7 @@ sudo apt-get install ros-<distro>-ros-tutorials
   * 두 개의 노드가 추가된 것을 알 수 있다.
   
   
-5. Understanding ROS Topics
+6. Understanding ROS Topics
 -----------------------------
 
 * Turtlesim Teleoperation : 거북이를 키보드 방향키로 움직이도록 할 수 있는 패키지
@@ -300,7 +300,7 @@ rosrun rqt_graph rqt_graph
 
     그 외의 자세한 내용은 [여기](http://wiki.ros.org/ROS/Tutorials/UnderstandingTopics)를 참조.
 
-5. Understanding ROS Services and Parameters
+7. Understanding ROS Services and Parameters
 -----------------------------
 
 * ROS Service : Node들이 서로 통신할 수 있는 또 다른 방법. Services는 request를 보내고 response를 받을 수 있도록 해줌.
