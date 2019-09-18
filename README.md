@@ -223,3 +223,31 @@ sudo apt-get install ros-<distro>-ros-tutorials
   
 
 * Node들은 Service를 사용하거나 제공할 수 있다.
+
+* rosrun을 통해서 노드 생성하기
+  1) roscore로 master 노드 생성 및 ROS 실행
+  ```bash
+  roscore
+  ```
+  ![roscore](https://i.imgur.com/EevvwJ0.png)
+  
+  2) 새로운 터미널을 열고 rosrun으로 거북이 실행하기
+  * rosrun '패키지이름' '노드이름' 형식.
+  ```bash
+  rosrun turtlesim turtlesim_node
+  ```
+  ![rosrun](https://i.imgur.com/e1ybWqR.png)
+  
+  
+  3) 새로운 터미널을 열고 노드이름을 다르게 거북이 실행하기
+  ```bash
+  rosrun turtlesim turtlesim_node __name:=my_turtle
+  ```
+  4) 새로운 터미널을 열고 현재 노드 확인하기.
+  ```bash
+  rosnode list
+  ```
+  ![rosnode list](https://i.imgur.com/CXtNPeB.png)
+  * 두 개의 노드가 추가된 것을 알 수 있다.
+  
+  
