@@ -299,3 +299,15 @@ rosrun rqt_graph rqt_graph
     - 두개의 coordination은 linear와 angular에 대한 인자이다.
 
     그 외의 자세한 내용은 [여기](http://wiki.ros.org/ROS/Tutorials/UnderstandingTopics)를 참조.
+
+5. Understanding ROS Services and Parameters
+-----------------------------
+
+* ROS Service : Node들이 서로 통신할 수 있는 또 다른 방법. Services는 request를 보내고 response를 받을 수 있도록 해줌.
+```
+rosservice list         print information about active services
+rosservice call         call the service with the provided args
+rosservice type         print service type
+rosservice find         find services by service type
+rosservice uri          print service ROSRPC uri
+```
