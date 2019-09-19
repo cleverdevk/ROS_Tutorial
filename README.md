@@ -311,3 +311,113 @@ rosservice type         print service type
 rosservice find         find services by service type
 rosservice uri          print service ROSRPC uri
 ```
+  * rosservice list : 현재 활성화된 노드들의 service list를 보여줌.
+  ```bash
+  rosservice list
+  ```
+    
+  ```bash
+  #output
+  /clear
+  /kill
+  /reset
+  /rosout/get_loggers
+  /rosout/set_logger_level
+  /spawn
+  /teleop_turtle/get_loggers
+  /teleop_turtle/set_logger_level
+  /turtle1/set_pen
+  /turtle1/teleport_absolute
+  /turtle1/teleport_relative
+  /turtlesim/get_loggers
+  /turtlesim/set_logger_level
+  ```
+  * rosservice type
+  ```bash
+  rossservice type /clear
+  ```
+  
+  * rosservice call : service call하는데,
+  ```bash
+  #형식
+  rosservice call [service] [args]
+  
+  #/clear는 args가 없기 때문에
+  rosservice call /clear
+  
+  #파이프를 사용하여 메시지 타입을 받아서 rossrv show에 인자로 전달하면 바로 argument를 확인할 수 있다.
+  rosservice type /spawn | rossrv show
+  ```
+  ![result](https://i.imgur.com/M5ipdVZ.png)
+  
+  해당 argument에 맞춰 call과 같이 전달하면,
+  ```bash
+  rosservice call /spawn 2 2 0.2 "helloturtle"
+  
+  #terminal return
+  name : helloturtle
+  ```
+  ![callresult](https://i.imgur.com/Yhq0Asx.png)
+  해당 service call이 실행된다.
+  
+* ROS Param(rosparam) : ROS Parameter Server에 데이터를 저장 수정할 수 있게 해 주는 명령어. Parameter Server에는 integer, float, boolean, dictionary, list들을 저장할 수 있으며, YAML markup language를 문법으로 사용한다.
+```
+rosparam set            set parameter
+rosparam get            get parameter
+rosparam load           load parameters from file
+rosparam dump           dump parameters to file
+rosparam delete         delete parameter
+rosparam list           list parameter names
+```
+  * rosparam list : 현재 parameter리스트를 보여줌.
+  ```bash
+  rosparam list
+  ```
+  
+  ```bash
+  #output
+  /background_b
+  /background_g
+  /background_r
+  /rosdistro
+  /roslaunch/uris/host_57aea0986fef__34309
+  /rosversion
+  /run_id
+  ```
+  
+  * rosparam set / get : 해당 파라미터 값을 조정 / 확인.
+  ```bash
+  #형식
+  rosparam set [param_name] [value]
+  rosparam get [param_name]
+  
+  #/로 get을 하면 모든 parameter를 확인 할 수 있다.
+  rosparam get /
+  
+  #값 변경
+  rosparam set /background_r 150
+  #새로고침을 위해
+  rosservice call /clear
+  ```
+  ![rosparamset](https://i.imgur.com/VSkYT1X.png)
+  
+  * rosparam dump / load : 파라미터 값을 저장 / 로드
+  ```bash
+  #형식
+  rosparam dump [file_name] [namespace]
+  rosparam load [file_name] [namespace]
+  
+  #param.yaml파일에 현재 파라미터 저장
+  rosparam dump params.yaml
+  
+  #params.yaml에 있는 값을 copy namespace에 저장.
+  rosparam load params.yaml copy
+  rosparam get /copy/background_b
+  ```
+  
+  
+  
+
+  
+  
+
